@@ -3,7 +3,7 @@ https://github.com/tadyen/Monifactory-Fission-Opt/issues/2
 
 I haven't had the time lately to patch for upstream changes into Monifactory's updates on NCN.
 
-This calculator is currently supported until Monifactory <= 0.12.0
+This calculator is currently supported until Monifactory < 0.12.0
 
 I've been seeing a bit of interest on it still despite being slated for depreciation. 
 

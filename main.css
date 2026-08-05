@@ -1,98 +1,98 @@
 #infoWarn {
-  color: red;
+    color: red;
 }
 
 header {
-  margin: 2vh 0;
+    margin: 2vh 0;
 }
 
 body {
-  line-height: 150%;
-  display: flex;
-  flex-direction: column;
+    line-height: 150%;
+    display: flex;
+    flex-direction: column;
 }
 
 footer{
-  padding-top: 1em;
+    padding-top: 1em;
 }
 
 .divStep{
-  margin: 2em 0;
+    margin: 2em 0;
 }
 
 .flex-container {
-  display: flex;
-  flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .flex-container > .flex-entry {
-  padding: 1em;
-  flex-basis: auto;
-  flex-shrink: 1;
+    padding: 1em;
+    flex-basis: auto;
+    flex-shrink: 1;
 }
 
 .flex-container > .selected {
-  background-color: rgb(255, 213, 134);
-  border-radius: 1em;
-  text-shadow: 0px 0px 1px cyan;
+    background-color: rgb(255, 213, 134);
+    border-radius: 1em;
+    text-shadow: 0px 0px 1px cyan;
 }
 
 table {
-  border-spacing: 1px;
-  background-color: black;
-  white-space: nowrap;
+    border-spacing: 1px;
+    background-color: black;
+    white-space: nowrap;
 }
 
 td, th, caption {
-  text-align: center;
-  font-weight: normal;
-  padding: 4px;
-  background-color: white;
+    text-align: center;
+    font-weight: normal;
+    padding: 4px;
+    background-color: white;
 }
 
 #divStep3 > table {
-  display: block;
-  overflow-x: scroll;
+    display: block;
+    overflow-x: scroll;
 }
 
 h2 {
-  display: inline;
-  margin-right: 1ch;
+    display: inline;
+    margin-right: 1ch;
 }
 
 input {
-  text-align: center;
+    text-align: center;
 }
 
 #settings>*, main>* {
-  margin-top: 0.3em;
+    margin-top: 0.3em;
 }
 
 .disabledLink {
-  color: gray;
-  cursor: not-allowed;
+    color: gray;
+    cursor: not-allowed;
 }
 
 #sizeX, #sizeY, #sizeZ {
-  width: 2.5ch;
+    width: 2.5ch;
 }
 
 #fuelBasePower, #fuelBaseHeat {
-  width: 8.5ch;
+    width: 8.5ch;
 }
 
 .fuelPresets {
-  overflow-x: auto;
+    overflow-x: auto;
 }
 
 #blockType>:not(:first-child) {
-  font-family: monospace;
-  font-weight: bold;
-  font-size: 135%;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 135%;
 }
 
 #rate input, #limit input, #activeRate input, #activeLimit input {
-  width: 5.5ch;
+    width: 5.5ch;
 }
 
 .Wt {color: dodgerblue;}
@@ -120,7 +120,9 @@ input {
 .Li {color: rgb(214, 214, 214);}
 .Mn {color: rgb(69, 0, 109);}
 .NB {color: #570404;}
-.Nt {color: rgb(36, 0, 0);}
+/* fixed: was ".Nt" which never matched the "Nr" (Netherite) class used
+   in index.html / main.js, so this column rendered uncolored */
+.Nr {color: rgb(36, 0, 0);}
 .Ob {color: #2a0035;}
 .Pm {color: rgb(0, 146, 146);}
 .Pp {color: rgb(214, 153, 255);}
@@ -131,34 +133,34 @@ input {
 .air {color: white;}
 
 #design>* {
-  float: left;
-  border: 1px solid black;
-  padding: 0.5em;
-  margin-bottom: 1em;
-  text-align: center;
-  font-family: sans-serif;
+    float: left;
+    border: 1px solid black;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    text-align: center;
+    font-family: sans-serif;
 }
 
 #design>:first-child {
-  min-width: 20em;
+    min-width: 20em;
 }
 
 .info {
-  position: relative;
+    position: relative;
 }
 
 .info>:nth-child(1) {
-  position: absolute;
-  left: 0px;
+    position: absolute;
+    left: 0px;
 }
 
 .info>:nth-child(2) {
-  position: absolute;
-  right: 0px;
+    position: absolute;
+    right: 0px;
 }
 
 .row {
-  font-family: monospace;
-  font-weight: bold;
-  font-size: 120%;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 120%;
 }

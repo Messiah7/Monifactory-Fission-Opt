@@ -1,220 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>NC Neoteric Fission Reactor Design Generator</title>
-    <link rel="stylesheet" href="main.css"/>
-    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    <script src="FissionOpt.js"></script>
-    <script src="main.js"></script>
-  </head>
-  <body>
-    <header>
-      <div>
-        <h2>NC-Neoteric Fission Reactor Designer</h2>
-        original by cyb0124, modified by tadyen <a href="https://github.com/tadyen/Monifactory-Fission-Opt">source</a>
-      </div>
-      <br>
-      <div>
-        This tool generates a fission reactor design that maximizes effective power output, breeding speed or efficiency.
+<head>
+<meta charset="utf-8" />
+<title>NC Neoteric Fission Reactor Design Generator</title>
+<link rel="stylesheet" href="main.css"/>
+<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script src="FissionOpt.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+<header>
+<div>
+<h2>NC-Neoteric Fission Reactor Designer</h2>
+original by cyb0124, modified by tadyen, further modified by Messiah7 <a href="https://github.com/Messiah7/Monifactory-Fission-Opt">source</a>
+</div>
+<br>
+<div>
+This tool generates a fission reactor design that maximizes effective power output, breeding speed or efficiency.
+Modified for use for <a href="https://github.com/igentuman/NuclearCraft-Neoteric">NC Neoteric</a> version of Nuclearcraft in the <a href="https://github.com/ThePansmith/Monifactory">Monifactory</a> modpack.
+For the original version of this optimiser, click <a href="https://leu-235.com/">here</a> instead.
+</div>
+<br>
+<div id="infoWarn">
+Note: NC Neoteric mechanics are different to the original Nuclearcraft. Moderation control, heat and reactivity mechanics have NOT been implemented in this calculator yet.
+</div>
+</header>
+<section id="settings">
+<div id="divStep1" class="divStep">
+<b>Step 1</b>: Input the core (interior) size of the reactor:
+<input type="text" id="sizeZ" title="Horizontal dimension of the reactor core (length/width)."> &times;
+<input type="text" id="sizeX" title="Height of the reactor core."> &times;
+<input type="text" id="sizeY" title="Horizontal dimension of the reactor core (length/width).">
+<div style="font-size:12px;color:#888;margin-top:4px;">
+Note: the field order is Z &times; <b>X (height)</b> &times; Y — not X&times;Y&times;Z. For a first passive build, a 3&times;3&times;3 to 5&times;5&times;5 cube is a good starting point.
+</div>
+</div>
 
-        Modified for use for <a href="https://github.com/igentuman/NuclearCraft-Neoteric">NC Neoteric</a> version of Nuclearcraft in the <a href="https://github.com/ThePansmith/Monifactory">Monifactory</a> modpack.
-        
-        For the original version of this optimiser, click <a href="https://leu-235.com/">here</a> instead.
-      </div>
-      <br>
-      <div id="infoWarn">
-        Note: NC Neoteric mechanics are different to the original Nuclearcraft. Moderation control, heat and reactivity mechanics have NOT been implemented in this calculator yet.
-      </div>
-    </header>
-    <section id="settings">
-      <div id="divStep1" class="divStep">
-        <b>Step 1</b>: Input the core (interior) size of the reactor:
-        <input type="text" id="sizeZ"> &times;
-        <input type="text" id="sizeX"> &times;
-        <input type="text" id="sizeY">
-      </div>
-      <div id="divStep2" class="divStep">
-        <b>Step 2</b>: Select the fuel to be used, or manually input fuel specifications.
-        <div>Fuel Base Power: <input type="text" id="fuelBasePower"> RF/t</div>
-        <div>Fuel Base Heat: <input text="text" id="fuelBaseHeat"> H/t</div>
-        <div class="fuelPresets flex-container">
-          <div class="flex-entry"><a href="javascript:;" id="TBU">TBU</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="LEU235">LEU-235</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="HEU235">HEU-235</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="LEU233">LEU-233</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="HEU233">HEU-233</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="LEN236">LEN-236</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="HEN236">HEN-236</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="LEP239">LEP-239</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="HEP239">HEP-239</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="LEP241">LEP-241</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="HEP241">HEP-241</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="LEA242">LEA-242</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="HEA242">HEA-242</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="LECm243">LECm-243</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="HECm243">HECm-243</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="LECm245">LECm-245</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="HECm245">HECm-245</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="LECm247">LECm-247</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="HECm247">HECm-247</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="LEB248">LEB-248</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="HEB248">HEB-248</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="LECf249">LECf-249</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="HECf249">HECf-249</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="LECf251">LECf-251</a></div>
-          <div class="flex-entry"><a href="javascript:;" id="HECf251">HECf-251</a></div>
-      </div>
-      <div id="divStep3" class="divStep">
-        <b>Step 3</b>: If you want to limit the usage of a type of block, enter the maximum number allowed in the table below.
-        Enter zero to completely disable that block. You can hover over the acronym to see the full name of each block.
-        Active coolers are disabled by default. You can enable them by removing the zeros.
-        <table>
-          <thead><tr id="blockType"><th>Block Type</th>
-            <th class="Wt">Wt</th><th class="Rs">Rs</th><th class="Qz">Qz</th>
-            <th class="Au">Au</th><th class="Gs">Gs</th><th class="Lp">Lp</th>
-            <th class="Dm">Dm</th><th class="He">He</th><th class="Ed">Ed</th>
-            <th class="Cy">Cy</th><th class="Fe">Fe</th><th class="Em">Em</th>
-            <th class="Cu">Cu</th><th class="Sn">Sn</th><th class="Mg">Mg</th>
-            <th class="Al">Al</th><th class="As">As</th><th class="B">B</th>
-            <th class="ES">ES</th><th class="Ft">Ft</th><th class="Pb">Pb</th>
-            <th class="N">N</th><th class="Li">Li</th><th class="Mn">Mn</th>
-            <th class="NB">NB</th><th class="Nr">Nr</th><th class="Ob">Ob</th>
-            <th class="Pm">Pm</th><th class="Pp">Pp</th><th class="Ag">Ag</th>
-            <th class="Sl">Sl</th>
-            <th class="cell">[]</th><th class="mod">##</th>
-          </tr></thead>
-          <tbody>
-            <tr id="rate"><th>Cooling Rate (H/t)</th>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td>
-              <td>&mdash;</td><td>&mdash;</td>
-            </tr>
-            <tr id="limit"><th>Max Allowed</th>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td>
-            </tr>
-            <tr id="activeRate"><th>Active Rate (H/t)</th>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
-              <td><input type="text"></td>
-              <td>&mdash;</td><td>&mdash;</td>
-            </tr>
-            <tr id="activeLimit"><th>Max Active Allowed</th>
-              <td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
-              <td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
-              <td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
-              <td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
-              <td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
-              <td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
-              <td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
-              <td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
-              <td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
-              <td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
-              <td><input type="text" value="0"></td>
-              <td>&mdash;</td><td>&mdash;</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div id="divStep4" class="divStep">
-        <b>Step 4 (Optional)</b>: Cooling rate data can be reset or manually modified here.
-        <a href="javascript:;" id="DefRate">Default</a>
-        Passive cooling rates are in the tooltip of each cooler item.
-      </div>
-      <div id="divStep5" class="divStep">
-        <b>Step 5</b>: Adjust the options below and click &ldquo;Run&rdquo; to start the optimization.<br>
-        <label><input type="checkbox" id="ensureActiveCoolerAccessible" checked>Ensure active coolers are accessible by piping.</label><br>
-        <label><input type="checkbox" id="ensureHeatNeutral" checked>Only generate heat neutral reactor.</label><br>
-        <div>
-          <div class="goalRadioSection">
-            <label><input type="radio" name="goal" value="0" checked>Optimize for power.</label><br>
-            <label><input type="radio" name="goal" value="1">Optimize for breeding (maximize fuel consumption rate).</label><br>
-            <label><input type="radio" name="goal" value="2">Optimize for efficiency.</label><br>
-          </div>
-        </div>
-        <label><input type="checkbox" id="symZ" checked>X symmetry</label>
-        <label><input type="checkbox" id="symX" checked>Y symmetry</label>
-        <label><input type="checkbox" id="symY" checked>Z symmetry</label><br>
-        <label><input type="checkbox" id="useNet" checked>Use reinforcement learning (requires more memory, slightly slower but can produce better design)</label><br>
-        <label><input type="checkbox" id="applyAdditionalGoals">Experimental. Apply additional goal custom targets to match.</label><br>
-        <div class="goalTableSection">
-          <table>
-            <caption>Custom Targets (Experimental)</caption>
-            <thead>
-              <th>Metric</th>
-              <th>Value #</th>
-              <th>Weight (&lt;float&gt; 0 to 1)</th>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Primary|Secondary goal weights(&lt;float&gt; 0 to 1)</td>
-                <td><input type="text" id="goalWeightPrimary" value="1"></td>
-                <td><input type="text" id="goalWeightSecondary" value="1"></td>
-              </tr>
-              <tr>
-                <td>Net Heat (&lt;int&gt; H/t)</td>
-                <td><input type="text" id="goalNetHeat" value="-0"></td>
-                <td><input type="text" id="goalWeightNetHeat" value="1"></td>
-              </tr>
-              <tr>
-                <td>Duty Cycle (&lt;float&gt; %)</td>
-                <td><input type="text" id="goalDutyCycle" value="100"></td>
-                <td><input type="text" id="goalWeightDutyCycle" value="1"></td>
-              </tr>
-              <tr>
-                <td>Fuel Cells (&lt;uint&gt;)</td>
-                <td><input type="text" id="goalFuelCells" value="1"></td>
-                <td><input type="text" id="goalWeightFuelCells" value="1"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="divStep">
-        <a href="javascript:;" id="run">Run</a>
-        <a href="javascript:;" id="pause" class="disabledLink">Pause</a>
-        <a href="javascript:;" id="stop" class="disabledLink">Stop</a>
-        <a href="javascript:;" id="save" class="disabledLink">Save JSON</a>
-      </div>
-      <div class="divStep">
-        <div id="progress"></div>
-        <div id="design"></div>
-      </div>
-    </section>
-    <footer>
-      <div>
-        asdf
-      </div>
-      <span style="color:red;">Note: in Chrome, this tab won't run in background! If you want to switch to other tabs, drag this tab out as a dedicated window and don't minimize it.</span>
-    </footer>
-  </body>
+<div id="divStep2" class="divStep">
+<b>Step 2</b>: Select the fuel to be used, or manually input fuel specifications.
+<div>Fuel Base Power: <input type="text" id="fuelBasePower"> RF/t</div>
+<div>Fuel Base Heat: <input text="text" id="fuelBaseHeat"> H/t</div>
+<div class="fuelPresets flex-container">
+<div class="flex-entry"><a href="javascript:;" id="TBU" title="Base Power: 4800 RF/t, Base Heat: 27 H/t">TBU</a></div>
+<div class="flex-entry"><a href="javascript:;" id="LEU235" title="Base Power: 12960 RF/t, Base Heat: 50 H/t">LEU-235</a></div>
+<div class="flex-entry"><a href="javascript:;" id="HEU235" title="Base Power: 51840 RF/t, Base Heat: 150 H/t">HEU-235</a></div>
+<div class="flex-entry"><a href="javascript:;" id="LEU233" title="Base Power: 17280 RF/t, Base Heat: 60 H/t">LEU-233</a></div>
+<div class="flex-entry"><a href="javascript:;" id="HEU233" title="Base Power: 69120 RF/t, Base Heat: 180 H/t">HEU-233</a></div>
+<div class="flex-entry"><a href="javascript:;" id="LEN236" title="Base Power: 7200 RF/t, Base Heat: 36 H/t">LEN-236</a></div>
+<div class="flex-entry"><a href="javascript:;" id="HEN236" title="Base Power: 28800 RF/t, Base Heat: 108 H/t">HEN-236</a></div>
+<div class="flex-entry"><a href="javascript:;" id="LEP239" title="Base Power: 9600 RF/t, Base Heat: 40 H/t">LEP-239</a></div>
+<div class="flex-entry"><a href="javascript:;" id="HEP239" title="Base Power: 38400 RF/t, Base Heat: 120 H/t">HEP-239</a></div>
+<div class="flex-entry"><a href="javascript:;" id="LEP241" title="Base Power: 23520 RF/t, Base Heat: 70 H/t">LEP-241</a></div>
+<div class="flex-entry"><a href="javascript:;" id="HEP241" title="Base Power: 94080 RF/t, Base Heat: 210 H/t">HEP-241</a></div>
+<div class="flex-entry"><a href="javascript:;" id="LEA242" title="Base Power: 26880 RF/t, Base Heat: 94 H/t">LEA-242</a></div>
+<div class="flex-entry"><a href="javascript:;" id="HEA242" title="Base Power: 107520 RF/t, Base Heat: 280 H/t">HEA-242</a></div>
+
+<!-- Disabled: not obtainable at current progression stage.
+     Remove the comment markers below (and add matching entries back
+     to fuelPresets in main.js) to re-enable any of these. -->
+<!--
+<div class="flex-entry"><a href="javascript:;" id="LECm243">LECm-243</a></div>
+<div class="flex-entry"><a href="javascript:;" id="HECm243">HECm-243</a></div>
+<div class="flex-entry"><a href="javascript:;" id="LECm245">LECm-245</a></div>
+<div class="flex-entry"><a href="javascript:;" id="HECm245">HECm-245</a></div>
+<div class="flex-entry"><a href="javascript:;" id="LECm247">LECm-247</a></div>
+<div class="flex-entry"><a href="javascript:;" id="HECm247">HECm-247</a></div>
+<div class="flex-entry"><a href="javascript:;" id="LEB248">LEB-248</a></div>
+<div class="flex-entry"><a href="javascript:;" id="HEB248">HEB-248</a></div>
+<div class="flex-entry"><a href="javascript:;" id="LECf249">LECf-249</a></div>
+<div class="flex-entry"><a href="javascript:;" id="HECf249">HECf-249</a></div>
+<div class="flex-entry"><a href="javascript:;" id="LECf251">LECf-251</a></div>
+<div class="flex-entry"><a href="javascript:;" id="HECf251">HECf-251</a></div>
+-->
+</div>
+</div>
+
+<div id="divStep3" class="divStep">
+<b>Step 3</b>: If you want to limit the usage of a type of block, enter the maximum number allowed in the table below.
+Enter zero to completely disable that block. You can hover over the acronym to see the full name of each block.
+Active coolers are disabled by default. You can enable them by removing the zeros.
+<table>
+<thead><tr id="blockType"><th>Block Type</th>
+<th class="Wt">Wt</th><th class="Rs">Rs</th><th class="Qz">Qz</th>
+<th class="Au">Au</th><th class="Gs">Gs</th><th class="Lp">Lp</th>
+<th class="Dm">Dm</th><th class="He">He</th><th class="Ed">Ed</th>
+<th class="Cy">Cy</th><th class="Fe">Fe</th><th class="Em">Em</th>
+<th class="Cu">Cu</th><th class="Sn">Sn</th><th class="Mg">Mg</th>
+<th class="Al">Al</th><th class="As">As</th><th class="B">B</th>
+<th class="ES">ES</th><th class="Ft">Ft</th><th class="Pb">Pb</th>
+<th class="N">N</th><th class="Li">Li</th><th class="Mn">Mn</th>
+<th class="NB">NB</th><th class="Nr">Nr</th><th class="Ob">Ob</th>
+<th class="Pm">Pm</th><th class="Pp">Pp</th><th class="Ag">Ag</th>
+<th class="Sl">Sl</th>
+<th class="cell">[]</th><th class="mod">##</th>
+</tr></thead>
+<tbody>
+<tr id="rate"><th>Cooling Rate (H/t)</th>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td>
+<td>&mdash;</td><td>&mdash;</td>
+</tr>
+<!-- Max Allowed defaults: 0 = disabled, blank = unlimited.
+     Only Water / Redstone / Quartz / Iron / Tin / Lead are allowed by default (early-game passive coolers).
+     Edit the value="0" attributes below as your progression unlocks new coolers.
+     The moderator column (##) is fixed at 0 because moderators are disabled in this pack. -->
+<tr id="limit"><th>Max Allowed</th>
+<td><input type="text"></td><!-- Wt: allowed -->
+<td><input type="text"></td><!-- Rs: allowed -->
+<td><input type="text"></td><!-- Qz: allowed -->
+<td><input type="text" value="0"></td><!-- Au -->
+<td><input type="text" value="0"></td><!-- Gs -->
+<td><input type="text" value="0"></td><!-- Lp -->
+<td><input type="text" value="0"></td><!-- Dm -->
+<td><input type="text" value="0"></td><!-- He -->
+<td><input type="text" value="0"></td><!-- Ed -->
+<td><input type="text" value="0"></td><!-- Cy -->
+<td><input type="text"></td><!-- Fe: allowed -->
+<td><input type="text" value="0"></td><!-- Em -->
+<td><input type="text" value="0"></td><!-- Cu -->
+<td><input type="text"></td><!-- Sn: allowed -->
+<td><input type="text" value="0"></td><!-- Mg -->
+<td><input type="text" value="0"></td><!-- Al -->
+<td><input type="text" value="0"></td><!-- As -->
+<td><input type="text" value="0"></td><!-- B -->
+<td><input type="text" value="0"></td><!-- ES -->
+<td><input type="text" value="0"></td><!-- Ft -->
+<td><input type="text"></td><!-- Pb: allowed -->
+<td><input type="text" value="0"></td><!-- N -->
+<td><input type="text" value="0"></td><!-- Li -->
+<td><input type="text" value="0"></td><!-- Mn -->
+<td><input type="text" value="0"></td><!-- NB -->
+<td><input type="text" value="0"></td><!-- Nr -->
+<td><input type="text" value="0"></td><!-- Ob -->
+<td><input type="text" value="0"></td><!-- Pm -->
+<td><input type="text" value="0"></td><!-- Pp -->
+<td><input type="text" value="0"></td><!-- Ag -->
+<td><input type="text" value="0"></td><!-- Sl -->
+<td><input type="text"></td><!-- []  fuel cell: unlimited -->
+<td><input type="text" value="0"></td><!-- ## moderator: disabled in this pack -->
+</tr>
+<tr id="activeRate"><th>Active Rate (H/t)</th>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>
+<td><input type="text"></td>
+<td>&mdash;</td><td>&mdash;</td>
+</tr>
+<tr id="activeLimit"><th>Max Active Allowed</th>
+<td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
+<td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
+<td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
+<td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
+<td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
+<td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
+<td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
+<td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
+<td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
+<td><input type="text" value="0"></td><td><input type="text" value="0"></td><td><input type="text" value="0"></td>
+<td><input type="text" value="0"></td>
+<td>&mdash;</td><td>&mdash;</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="divStep4" class="divStep">
+<b>Step 4 (Optional)</b>: Cooling rate data can be reset or manually modified here.
+<a href="javascript:;" id="DefRate">Default</a>
+Passive cooling rates are in the tooltip of each cooler item.
+</div>
+
+<div id="divStep5" class="divStep">
+<b>Step 5</b>: Adjust the options below and click &ldquo;Run&rdquo; to start the optimization.<br>
+
+<label title="Requires active (fluid) coolers to be reachable by pipes from outside the reactor. Irrelevant for a fully passive build (Max Active Allowed = 0 for every cooler type, which is the default in this fork).">
+<input type="checkbox" id="ensureActiveCoolerAccessible" checked>Ensure active coolers are accessible by piping.</label><br>
+
+<label title="Keep this on: the reactor must not overheat, i.e. total cooling has to be at least equal to total heat generated.">
+<input type="checkbox" id="ensureHeatNeutral" checked>Only generate heat neutral reactor.</label><br>
+
+<div>
+<div class="goalRadioSection">
+<label title="Maximizes total power output (RF/t)."><input type="radio" name="goal" value="0" checked>Optimize for power.</label><br>
+<label title="Maximizes fuel consumption rate — useful for isotope breeding rather than raw power generation."><input type="radio" name="goal" value="1">Optimize for breeding (maximize fuel consumption rate).</label><br>
+<label title="Maximizes efficiency (RF per unit of fuel consumed) — lower power output, but fuel lasts longer."><input type="radio" name="goal" value="2">Optimize for efficiency.</label><br>
+</div>
+</div>
+
+<!-- Note: checkbox ids (symZ/symX/symY) map 1:1 to the Step 1 fields
+     (sizeZ/sizeX/sizeY), but the visible labels below ("X/Y/Z symmetry")
+     do NOT match those ids — this mismatch exists upstream and is only
+     documented here via tooltips, not fixed, to avoid breaking anything
+     relying on the current label text. -->
+<label title="Symmetry along the first (horizontal, Z) dimension of the core.">
+<input type="checkbox" id="symZ" checked>X symmetry</label>
+<label title="Symmetry along the height (X) dimension of the core.">
+<input type="checkbox" id="symX" checked>Y symmetry</label>
+<label title="Symmetry along the second horizontal (Y) dimension of the core.">
+<input type="checkbox" id="symY" checked>Z symmetry</label><br>
+
+<label title="Enables a reinforcement-learning search. Can produce a better layout, but is noticeably slower and more memory-hungry — disable on a weaker machine.">
+<input type="checkbox" id="useNet" checked>Use reinforcement learning (requires more memory, slightly slower but can produce better design)</label><br>
+
+<label title="Experimental: lets you target specific values (net heat, duty cycle, cell count) with weights, instead of a simple maximize/minimize goal.">
+<input type="checkbox" id="applyAdditionalGoals">Experimental. Apply additional goal custom targets to match.</label><br>
+
+<div class="goalTableSection">
+<table>
+<caption title="Only used when 'Apply additional goal custom targets' above is checked.">Custom Targets (Experimental)</caption>
+<thead>
+<th>Metric</th>
+<th>Value #</th>
+<th>Weight (&lt;float&gt; 0 to 1)</th>
+</thead>
+<tbody>
+<tr>
+<td title="How strongly the primary optimization goal (power/breeding/efficiency) is weighted against these custom targets.">Primary|Secondary goal weights(&lt;float&gt; 0 to 1)</td>
+<td><input type="text" id="goalWeightPrimary" value="1"></td>
+<td><input type="text" id="goalWeightSecondary" value="1"></td>
+</tr>
+<tr>
+<td title="Target net heat output, in H/t. 0 = heat-neutral. Negative values target a net-cooling reactor.">Net Heat (&lt;int&gt; H/t)</td>
+<td><input type="text" id="goalNetHeat" value="-0"></td>
+<td><input type="text" id="goalWeightNetHeat" value="1"></td>
+</tr>
+<tr>
+<td title="Target duty cycle percentage — how much of the time the reactor actively runs vs. idles while cooling down.">Duty Cycle (&lt;float&gt; %)</td>
+<td><input type="text" id="goalDutyCycle" value="100"></td>
+<td><input type="text" id="goalWeightDutyCycle" value="1"></td>
+</tr>
+<tr>
+<td title="Target number of fuel cells in the design — useful for controlling fuel burn rate and build cost.">Fuel Cells (&lt;uint&gt;)</td>
+<td><input type="text" id="goalFuelCells" value="1"></td>
+<td><input type="text" id="goalWeightFuelCells" value="1"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="divStep">
+<a href="javascript:;" id="run">Run</a>
+<a href="javascript:;" id="pause" class="disabledLink">Pause</a>
+<a href="javascript:;" id="stop" class="disabledLink">Stop</a>
+<a href="javascript:;" id="save" class="disabledLink">Save JSON</a>
+</div>
+
+<div class="divStep">
+<div id="progress"></div>
+<div id="design"></div>
+</div>
+</section>
+<footer>
+<div>
+asdf
+</div>
+<span style="color:red;">Note: in Chrome, this tab won't run in background! If you want to switch to other tabs, drag this tab out as a dedicated window and don't minimize it.</span>
+</footer>
+</body>
 </html>

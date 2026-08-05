@@ -17,7 +17,7 @@ Modified rules to work with [NuclearCraft Neoteric](https://github.com/igentuman
 - Fixed a CSS typo (`.Nt` → `.Nr`) so the Netherite cooler column renders with its intended color
 
 <details>
-<summary>Upstream note from tadyen (kept for reference)</summary>
+<summary>⚠️ Upstream note from tadyen (kept for reference) ⚠️</summary>
 
 > ⚠️ OUTDATED WARNING ⚠️ ([#2](https://github.com/tadyen/Monifactory-Fission-Opt/issues/2))
 >

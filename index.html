@@ -32,9 +32,6 @@ Note: NC Neoteric mechanics are different to the original Nuclearcraft. Moderati
 <input type="text" id="sizeZ" title="Horizontal dimension of the reactor core (length/width)."> &times;
 <input type="text" id="sizeX" title="Height of the reactor core."> &times;
 <input type="text" id="sizeY" title="Horizontal dimension of the reactor core (length/width).">
-<div style="font-size:12px;color:#888;margin-top:4px;">
-Note: the field order is Z &times; <b>X (height)</b> &times; Y — not X&times;Y&times;Z. For a first passive build, a 3&times;3&times;3 to 5&times;5&times;5 cube is a good starting point.
-</div>
 </div>
 
 <div id="divStep2" class="divStep">
@@ -111,21 +108,21 @@ Active coolers are disabled by default. You can enable them by removing the zero
 <td>&mdash;</td><td>&mdash;</td>
 </tr>
 <!-- Max Allowed defaults: 0 = disabled, blank = unlimited.
-     Only Water / Redstone / Quartz / Iron / Tin / Lead are allowed by default (early-game passive coolers).
+     Only Lapis / Enderium / Tin / Manganese are allowed by default.
      Edit the value="0" attributes below as your progression unlocks new coolers.
      The moderator column (##) is fixed at 0 because moderators are disabled in this pack. -->
 <tr id="limit"><th>Max Allowed</th>
-<td><input type="text"></td><!-- Wt: allowed -->
-<td><input type="text"></td><!-- Rs: allowed -->
-<td><input type="text"></td><!-- Qz: allowed -->
+<td><input type="text" value="0"></td><!-- Wt -->
+<td><input type="text" value="0"></td><!-- Rs -->
+<td><input type="text" value="0"></td><!-- Qz -->
 <td><input type="text" value="0"></td><!-- Au -->
 <td><input type="text" value="0"></td><!-- Gs -->
-<td><input type="text" value="0"></td><!-- Lp -->
+<td><input type="text"></td><!-- Lp: allowed -->
 <td><input type="text" value="0"></td><!-- Dm -->
 <td><input type="text" value="0"></td><!-- He -->
-<td><input type="text" value="0"></td><!-- Ed -->
+<td><input type="text"></td><!-- Ed: allowed -->
 <td><input type="text" value="0"></td><!-- Cy -->
-<td><input type="text"></td><!-- Fe: allowed -->
+<td><input type="text" value="0"></td><!-- Fe -->
 <td><input type="text" value="0"></td><!-- Em -->
 <td><input type="text" value="0"></td><!-- Cu -->
 <td><input type="text"></td><!-- Sn: allowed -->
@@ -135,10 +132,10 @@ Active coolers are disabled by default. You can enable them by removing the zero
 <td><input type="text" value="0"></td><!-- B -->
 <td><input type="text" value="0"></td><!-- ES -->
 <td><input type="text" value="0"></td><!-- Ft -->
-<td><input type="text"></td><!-- Pb: allowed -->
+<td><input type="text" value="0"></td><!-- Pb -->
 <td><input type="text" value="0"></td><!-- N -->
 <td><input type="text" value="0"></td><!-- Li -->
-<td><input type="text" value="0"></td><!-- Mn -->
+<td><input type="text"></td><!-- Mn: allowed -->
 <td><input type="text" value="0"></td><!-- NB -->
 <td><input type="text" value="0"></td><!-- Nr -->
 <td><input type="text" value="0"></td><!-- Ob -->

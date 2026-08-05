@@ -50,9 +50,11 @@ td, th, caption {
     background-color: white;
 }
 
-#divStep3 > table {
-    display: block;
-    overflow-x: scroll;
+.tableScroll {
+    overflow-x: auto;
+    /* table itself stays display:table (default) and only grows to fit
+       its content, so its black background no longer stretches past
+       the last real column like it did with display:block on <table> */
 }
 
 h2 {

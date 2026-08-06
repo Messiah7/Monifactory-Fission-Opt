@@ -8,6 +8,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 <script src="FissionOpt.js"></script>
 <script src="main.js"></script>
+<script src="reactor-solver.js"></script>
+<script src="custom-solver-ui.js"></script>
 </head>
 <body>
 <header>
@@ -208,11 +210,11 @@ Passive cooling rates are in the tooltip of each cooler item.
      do NOT match those ids — this mismatch exists upstream and is only
      documented here via tooltips, not fixed, to avoid breaking anything
      relying on the current label text. -->
-<label title="Symmetry along the first (horizontal, X) dimension of the core.">
+<label title="Symmetry along the first (horizontal, Z) dimension of the core.">
 <input type="checkbox" id="symZ" checked>X symmetry</label>
-<label title="Symmetry along the height (Y) dimension of the core.">
+<label title="Symmetry along the height (X) dimension of the core.">
 <input type="checkbox" id="symX" checked>Y symmetry</label>
-<label title="Symmetry along the second horizontal (Z) dimension of the core.">
+<label title="Symmetry along the second horizontal (Y) dimension of the core.">
 <input type="checkbox" id="symY" checked>Z symmetry</label><br>
 
 <label title="Enables a reinforcement-learning search. Can produce a better layout, but is noticeably slower and more memory-hungry — disable on a weaker machine.">
@@ -260,11 +262,19 @@ Passive cooling rates are in the tooltip of each cooler item.
 <a href="javascript:;" id="pause" class="disabledLink">Pause</a>
 <a href="javascript:;" id="stop" class="disabledLink">Stop</a>
 <a href="javascript:;" id="save" class="disabledLink">Save JSON</a>
+&nbsp;|&nbsp;
+<a href="javascript:;" id="runCustom" title="Runs the custom JS solver (reactor-solver.js) independently, so you can compare its result against the WASM engine above.">Run Custom Solver</a>
 </div>
 
 <div class="divStep">
 <div id="progress"></div>
 <div id="design"></div>
+</div>
+
+<div class="divStep">
+<b>Custom Solver Result</b> (reactor-solver.js — separate from the WASM engine above, for comparison)
+<div id="customProgress"></div>
+<div id="customDesign"></div>
 </div>
 </section>
 <footer>
